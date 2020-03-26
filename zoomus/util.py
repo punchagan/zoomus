@@ -99,6 +99,8 @@ class ApiClient(object):
             data = json.dumps(data)
         if headers is None and self.config.get("version") == API_VERSION_2:
             headers = {"Authorization": "Bearer {}".format(self.config.get("token"))}
+        if data:
+            headers['Content-Type'] = 'application/json'
         return requests.post(
             self.url_for(endpoint),
             params=params,
@@ -125,6 +127,8 @@ class ApiClient(object):
             data = json.dumps(data)
         if headers is None and self.config.get("version") == API_VERSION_2:
             headers = {"Authorization": "Bearer {}".format(self.config.get("token"))}
+        if data:
+            headers['Content-Type'] = 'application/json'
         return requests.patch(
             self.url_for(endpoint),
             params=params,
@@ -175,6 +179,8 @@ class ApiClient(object):
             data = json.dumps(data)
         if headers is None and self.config.get("version") == API_VERSION_2:
             headers = {"Authorization": "Bearer {}".format(self.config.get("token"))}
+        if data:
+            headers['Content-Type'] = 'application/json'
         return requests.put(
             self.url_for(endpoint),
             params=params,
