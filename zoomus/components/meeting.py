@@ -48,11 +48,12 @@ class MeetingComponentV2(base.BaseComponent):
         )
 
     def create(self, **kwargs):
-        util.require_keys(kwargs, "user_id")
+        util.require_keys(kwargs, ["user_id", "data"])
         if kwargs.get("start_time"):
             kwargs["start_time"] = util.date_to_str(kwargs["start_time"])
+        data = kwargs.pop('data')
         return self.post_request(
-            "/users/{}/meetings".format(kwargs.get("user_id")), params=kwargs
+            "/users/{}/meetings".format(kwargs.get("user_id")), params=kwargs, data=data
         )
 
     def get(self, **kwargs):
